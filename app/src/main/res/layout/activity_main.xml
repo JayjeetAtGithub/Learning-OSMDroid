@@ -13,4 +13,9 @@
         android:layout_height="wrap_content"
         android:text="show map" />
 
+    <Button
+        android:id="@+id/show_saved_regions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="show saved regions"/>
 </LinearLayout>
