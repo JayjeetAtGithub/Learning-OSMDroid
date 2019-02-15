@@ -41,6 +41,10 @@ public class RenderMapActivity extends AppCompatActivity {
         kmlDocument.parseKMLFile(file);
 
         FolderOverlay kmlOverlay = (FolderOverlay)kmlDocument.mKmlRoot.buildOverlay(map, null, null, kmlDocument);
+
+        BoundingBox bb = kmlDocument.mKmlRoot.getBoundingBox();
+        map.zoomToBoundingBox(bb,true);
+        map.getController().setCenter(bb.getCenter());
         map.getOverlays().add(kmlOverlay);
         map.invalidate();
 

@@ -29,7 +29,6 @@ public class MapsActivity extends AppCompatActivity implements MapEventsReceiver
     private MapEventsOverlay mapEventsOverlay;
     private KmlDocument kmlDocument;
     private List<GeoPoint> geoPoints;
-    private Polygon polygon;
     private Polyline polyline;
     private Button saveButton;
     public static final String TOAST_SAVE_MESSAGE = "Saved";
@@ -48,7 +47,7 @@ public class MapsActivity extends AppCompatActivity implements MapEventsReceiver
             @Override
             public void onClick(View v) {
                 // Saves the polygon in a KML File
-                kmlDocument.mKmlRoot.addOverlay(polygon,kmlDocument);
+                kmlDocument.mKmlRoot.addOverlay(polyline,kmlDocument);
                 long millis = System.currentTimeMillis();
                 File localFile = kmlDocument.getDefaultPathForAndroid("KML_" + millis + ".kml");
                 Log.d("path",localFile.getAbsolutePath());
