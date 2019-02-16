@@ -31,11 +31,6 @@ public class MapsActivity extends AppCompatActivity implements MapEventsReceiver
     private List<GeoPoint> geoPoints;
     private Polyline polyline;
     private Button saveButton;
-    public static final String TOAST_SAVE_MESSAGE = "Saved";
-
-    public void toast(String message){
-        Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +47,7 @@ public class MapsActivity extends AppCompatActivity implements MapEventsReceiver
                 File localFile = kmlDocument.getDefaultPathForAndroid("KML_" + millis + ".kml");
                 Log.d("path",localFile.getAbsolutePath());
                 kmlDocument.saveAsKML(localFile);
-                toast(TOAST_SAVE_MESSAGE);
+                Toast.makeText(getApplicationContext(),"Polyline Saved",Toast.LENGTH_SHORT).show();
             }
         });
 
