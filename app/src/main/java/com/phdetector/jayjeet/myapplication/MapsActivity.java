@@ -31,7 +31,7 @@ public class MapsActivity extends AppCompatActivity implements MapEventsReceiver
     private KmlDocument kmlDocument;
     private List<GeoPoint> geoPoints;
     private Polygon polygon;
-    private Button saveButton;
+    private Button saveButton, resetButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +39,8 @@ public class MapsActivity extends AppCompatActivity implements MapEventsReceiver
         setContentView(R.layout.activity_maps);
 
         saveButton = findViewById(R.id.save_button);
+        resetButton = findViewById(R.id.reset_button);
+
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,6 +51,17 @@ public class MapsActivity extends AppCompatActivity implements MapEventsReceiver
                 Log.d("path",localFile.getAbsolutePath());
                 kmlDocument.saveAsKML(localFile);
                 Toast.makeText(getApplicationContext(),"Polygon Saved",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                geoPoints.clear();
+                polygon.setPoints(geoPoints);
+                map.getOverlays().clear();
+                map.getOverlays().add(0,mapEventsOverlay);
+                map.invalidate();
             }
         });
 
