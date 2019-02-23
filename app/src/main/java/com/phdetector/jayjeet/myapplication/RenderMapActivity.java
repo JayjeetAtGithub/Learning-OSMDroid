@@ -24,6 +24,7 @@ public class RenderMapActivity extends AppCompatActivity implements MapView.OnFi
     private MapView map;
     private KmlDocument kmlDocument;
     private BoundingBox mInitialBoundingBox = null;
+    private BoundingBox bb = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,14 @@ public class RenderMapActivity extends AppCompatActivity implements MapView.OnFi
         FolderOverlay kmlOverlay = (FolderOverlay)kmlDocument.mKmlRoot.buildOverlay(map, null, null, kmlDocument);
         map.getOverlays().add(kmlOverlay);
         map.invalidate();
-        BoundingBox bb = kmlDocument.mKmlRoot.getBoundingBox();
+        try {
+            bb = kmlDocument.mKmlRoot.getBoundingBox();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(),"No Polygon was drawn",Toast.LENGTH_SHORT).show();
+        }
+
         if(bb != null){
             setInitialViewOn(bb);
         }
